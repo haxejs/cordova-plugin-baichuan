@@ -6,6 +6,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 /*
 import com.ali.auth.third.core.model.Session;
 import com.alibaba.baichuan.android.trade.AlibcTrade;
@@ -27,10 +30,6 @@ import com.alibaba.baichuan.trade.biz.core.taoke.AlibcTaokeParams;
 import com.alibaba.baichuan.trade.biz.login.AlibcLogin;
 import com.alibaba.baichuan.trade.biz.login.AlibcLoginCallback;
 import com.alibaba.baichuan.trade.common.utils.JSONUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
