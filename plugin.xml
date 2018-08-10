@@ -106,5 +106,6 @@
         </config-file>
 
         <framework src="src/android/android-build.gradle" custom="true" type="gradleReference"/>
+        <resource-file src="src/android/yw_1222.jpg" target="res/drawable/yw_1222.jpg" />
     </platform>
 </plugin>
