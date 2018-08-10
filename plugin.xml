@@ -62,9 +62,15 @@
         <source-file src="src/ios/AppDelegate+Baichuan.m" />
 
         <resource-file src="src/ios/libs/Resources/AlibabaAuthSDK.bundle"/>
-        <resource-file src="src/ios/libs/Resources/AlipaySDK.bundle"/>
+        <!-- <resource-file src="src/ios/libs/Resources/AlipaySDK.bundle"/> -->
         <resource-file src="src/ios/libs/Resources/ALPLinkPartnerSDK.bundle"/>
         <resource-file src="src/ios/libs/Resources/NBResource.bundle"/>
+
+        <resource-file src="src/ios/libs/Resources/yw_1222.jpg"/>
+
+        <framework src="libsqlite3.tbd" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreTelephony.framework" />
 
         <framework custom="true" src="src/ios/libs/Frameworks/AlibabaAuthExt.framework" />
         <framework custom="true" src="src/ios/libs/Frameworks/AlibabaAuthSDK.framework" />
@@ -82,7 +88,7 @@
         <framework custom="true" src="src/ios/libs/Frameworks/UTMini.framework" />
 
         <!--与支付宝插件不能共存-->
-        <framework custom="true" src="src/ios/libs/Frameworks/AlipaySDK.framework" />
+        <!-- <framework custom="true" src="src/ios/libs/Frameworks/AlipaySDK.framework" /> -->
 
     </platform>
 
