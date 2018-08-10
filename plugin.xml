@@ -34,7 +34,7 @@
             </dict>
         </config-file>
 
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+        <!-- <config-file target="*-Info.plist" parent="CFBundleURLTypes">
             <array>
                 <dict>
                     <key>CFBundleTypeRole</key>
@@ -47,7 +47,7 @@
                     </array>
                 </dict>
             </array>
-        </config-file>
+        </config-file> -->
 
         <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
