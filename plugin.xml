@@ -105,7 +105,9 @@
             </feature>
         </config-file>
 
+        <!-- TODO:use startApp plugin in android to replace baichuan
         <framework src="src/android/android-build.gradle" custom="true" type="gradleReference"/>
-        <resource-file src="src/android/yw_1222.jpg" target="res/drawable/yw_1222.jpg" />
+        <resource-file src="src/android/yw_1222.jpg" target="res/drawable/yw_1222.jpg" /> 
+        -->
     </platform>
 </plugin>
