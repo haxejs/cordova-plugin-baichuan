@@ -58,8 +58,6 @@
 
         <header-file src="src/ios/BaichuanPlugin.h" />
         <source-file src="src/ios/BaichuanPlugin.m" />
-        <header-file src="src/ios/AppDelegate+Baichuan.h" />
-        <source-file src="src/ios/AppDelegate+Baichuan.m" />
 
         <resource-file src="src/ios/libs/Resources/AlibabaAuthSDK.bundle"/>
         <!-- <resource-file src="src/ios/libs/Resources/AlipaySDK.bundle"/> -->
