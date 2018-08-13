@@ -1,47 +1,49 @@
-repositories {
-        mavenCentral()
-        jcenter()
-        maven {
-            url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+cdvPluginPostBuildExtras.add({
+        repositories {
+                mavenCentral()
+                jcenter()
+                maven {
+                        url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+                }
         }
-}
 
-dependencies {
+        dependencies {
+                implementation 'com.android.support:support-v4:27.1.0'
+                //fastjson
+                implementation 'com.alibaba:fastjson:1.2.9'
 
-        //fastjson（以使用方接入版本为准）
-        implementation 'com.alibaba:fastjson:1.2.9'
+                //支付
+                implementation 'com.alibaba.alipay:alipaySingle:20160825@jar'
 
-        //支付（以支付宝官网公布的百川版本为准）
-        //implementation 'com.alibaba.alipay:alipaySingle:20160825@jar'
+                //登陆
+                implementation 'com.ali.auth.sdk:alibabauth_core:1.4.3@jar'
+                implementation 'com.ali.auth.sdk:alibabauth_ui:1.4.3@aar'
+                implementation 'com.ali.auth.sdk:alibabauth_ext:1.4.3@jar'
+                //【可选】仅供特殊合作伙伴使用
+                implementation 'com.ali.auth.sdk:alibabauth_accountlink:1.1.4@jar'
 
-        //登陆
-        implementation 'com.ali.auth.sdk:alibabauth_core:1.4.3@jar'
-        implementation 'com.ali.auth.sdk:alibabauth_ui:1.4.3@aar'
-        implementation 'com.ali.auth.sdk:alibabauth_ext:1.4.3@jar'
-        //【可选】仅供特殊合作伙伴使用
-        //implementation 'com.ali.auth.sdk:alibabauth_accountlink:1.1.4@jar'
+                //安全基础
+                implementation 'com.taobao.android:securityguardaar3:5.1.81@aar'
+                //【可选】安全高级，如使用了发放红包、优惠券高级功能，则必须引入
+                //implementation 'com.taobao.android:securitybodyaar3:5.1.25@aar'
 
-        //安全基础
-        implementation 'com.taobao.android:securityguardaar3:5.1.81@aar'
-        //【可选】安全高级，如使用了发放红包、优惠券高级功能，则必须引入
-        //implementation 'com.taobao.android:securitybodyaar3:5.1.25@aar'
+                //Mtop网关
+                implementation 'com.taobao.android:mtopsdk_allinone_open:1.2.2.4@jar'
 
-        //Mtop网关
-        implementation 'com.taobao.android:mtopsdk_allinone_open:1.2.2.4@jar'
+                //applink
+                implementation 'com.alibaba.sdk.android:alibc_link_partner:1.1.0.0'
 
-        //applink
-        implementation 'com.alibaba.sdk.android:alibc_link_partner:1.1.0.0'
+                //UT
+                implementation 'com.taobao.android:utdid4all:1.1.5.3_proguard@jar'
+                implementation 'com.alibaba.mtl:app-monitor-sdk:2.5.1.3_for_bc_proguard@jar'
+                //联盟SDK
+                implementation 'com.alimama.tunion.sdk:tuniontradesdk:0.3.2@aar'
+                //电商SDK
+                implementation 'com.alibaba.sdk.android:alibc_trade_common:3.1.1.206'
+                implementation 'com.alibaba.sdk.android:alibc_trade_biz:3.1.1.206'
+                implementation 'com.alibaba.sdk.android:alibc_trade_sdk:3.1.1.206'
 
-        //UT
-        implementation 'com.taobao.android:utdid4all:1.1.5.3_proguard@jar'
-        implementation 'com.alibaba.mtl:app-monitor-sdk:2.5.1.3_for_bc_proguard@jar'
+        }
+ 
+});
 
-        //联盟SDK
-        //implementation 'com.alimama.tunion.sdk:tuniontradesdk:0.3.2@aar'
-
-        //电商SDK
-        implementation 'com.alibaba.sdk.android:alibc_trade_common:3.1.1.206@aar'
-        implementation 'com.alibaba.sdk.android:alibc_trade_biz:3.1.1.206@aar'
-        implementation 'com.alibaba.sdk.android:alibc_trade_sdk:3.1.1.206@aar'
-
-}

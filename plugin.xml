@@ -19,7 +19,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <preference name="APPKEY" />
+        <!-- <preference name="APPKEY" /> -->
         <config-file target="config.xml" parent="/*">
             <feature name="BaichuanPlugin">
                 <param name="ios-package" value="BaichuanPlugin" />
@@ -92,6 +92,7 @@
 
     <!-- android -->
     <platform name="android">
+        <!-- <preference name="APPKEY" /> -->
         <source-file
                 src="src/android/BaichuanPlugin.java"
                 target-dir="src/com/zhijianhuo/cordova/plugin"/>
@@ -102,10 +103,8 @@
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
-
-        <!-- TODO:use startApp plugin in android to replace baichuan
-        <framework src="src/android/android-build.gradle" custom="true" type="gradleReference"/>
+    
         <resource-file src="src/android/yw_1222.jpg" target="res/drawable/yw_1222.jpg" /> 
-        -->
+        <framework src="src/android/android-build.gradle" custom="true" type="gradleReference"/>
     </platform>
 </plugin>

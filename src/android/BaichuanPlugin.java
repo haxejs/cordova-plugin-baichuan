@@ -9,7 +9,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-/*
+
 import com.ali.auth.third.core.model.Session;
 import com.alibaba.baichuan.android.trade.AlibcTrade;
 import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
@@ -35,16 +35,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-*/
+
 
 public class BaichuanPlugin extends CordovaPlugin {
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        callbackContext.error("Invalid Action");
-        return false;
-    }
 
-/*
+
     private static final String TAG = "BaichuanPlugin";
 
     private Boolean sdk_inited = false;
@@ -274,7 +269,7 @@ public class BaichuanPlugin extends CordovaPlugin {
             if (showArgs.has("clientType"))
                 showParam.setClientType(showArgs.optString("clientType"));
             if (showArgs.has("nativeFailMode"))
-                showParam.setNativeOpenFailedMode(AlibcFailModeType.valueOf("AlibcNativeFailMode" + showArgs.optString("nativeOpenFailedMode")));
+                showParam.setNativeOpenFailedMode(AlibcFailModeType.valueOf("AlibcNativeFailMode" + showArgs.optString("nativeFailMode")));
             if (showArgs.has("pageClose")) showParam.setPageClose(showArgs.optBoolean("pageClose"));
             if (showArgs.has("proxyWebview"))
                 showParam.setProxyWebview(showArgs.optBoolean("proxyWebview"));
@@ -315,5 +310,5 @@ public class BaichuanPlugin extends CordovaPlugin {
             callbackContext.success();
         }
     }
-*/
+
 }
