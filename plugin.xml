@@ -19,7 +19,7 @@
 
     <!-- ios -->
     <platform name="ios">
-        <!-- <preference name="APPKEY" /> -->
+        <preference name="APPKEY" />
         <config-file target="config.xml" parent="/*">
             <feature name="BaichuanPlugin">
                 <param name="ios-package" value="BaichuanPlugin" />
@@ -92,7 +92,7 @@
 
     <!-- android -->
     <platform name="android">
-        <!-- <preference name="APPKEY" /> -->
+        <preference name="APPKEY" />
         <source-file
                 src="src/android/BaichuanPlugin.java"
                 target-dir="src/com/zhijianhuo/cordova/plugin"/>
