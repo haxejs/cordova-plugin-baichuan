@@ -17,13 +17,13 @@ import com.alibaba.baichuan.android.trade.callback.AlibcTradeCallback;
 import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
 import com.alibaba.baichuan.android.trade.model.AlibcShowParams;
 import com.alibaba.baichuan.android.trade.model.OpenType;
-import com.alibaba.baichuan.android.trade.page.AlibcAddCartPage;
-import com.alibaba.baichuan.android.trade.page.AlibcBasePage;
-import com.alibaba.baichuan.android.trade.page.AlibcDetailPage;
-import com.alibaba.baichuan.android.trade.page.AlibcMyCartsPage;
-import com.alibaba.baichuan.android.trade.page.AlibcMyOrdersPage;
-import com.alibaba.baichuan.android.trade.page.AlibcPage;
-import com.alibaba.baichuan.android.trade.page.AlibcShopPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcAddCartPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcBasePage;
+//import com.alibaba.baichuan.android.trade.page.AlibcDetailPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcMyCartsPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcMyOrdersPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcPage;
+//import com.alibaba.baichuan.android.trade.page.AlibcShopPage;
 import com.alibaba.baichuan.trade.biz.applink.adapter.AlibcFailModeType;
 import com.alibaba.baichuan.trade.biz.context.AlibcTradeResult;
 import com.alibaba.baichuan.trade.biz.core.taoke.AlibcTaokeParams;
@@ -35,6 +35,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import android.webkit.WebChromeClient;
+import android.webkit.WebViewClient;
 
 
 public class BaichuanPlugin extends CordovaPlugin {
@@ -135,7 +138,7 @@ public class BaichuanPlugin extends CordovaPlugin {
             case "login":
                 alibcLogin.showLogin(new AlibcLoginCallback() {
                     @Override
-                    public void onSuccess(int i) {
+                    public void onSuccess(int i,String userId, String nick) {
                         returnSession(callbackContext);
                     }
                     @Override
@@ -150,7 +153,7 @@ public class BaichuanPlugin extends CordovaPlugin {
             case "logout":
                 alibcLogin.logout(new AlibcLoginCallback() {
                     @Override
-                    public void onSuccess(int i) {
+                    public void onSuccess(int i,String userId, String nick) {
                         callbackContext.success();
                     }
 
@@ -194,20 +197,20 @@ public class BaichuanPlugin extends CordovaPlugin {
         Iterator<String> keys = settings.keys();
         for (String key; keys.hasNext(); ) {
             key = keys.next();
-            if ("forceH5".equals(key)) {
-                AlibcTradeSDK.setForceH5(settings.optBoolean(key));
-            } else if ("syncForTaoke".equals(key)) {
-                AlibcTradeSDK.setSyncForTaoke(settings.optBoolean(key));
-            } else if ("taokeParams".equals(key)) {
-                AlibcTradeSDK.setTaokeParams(getTaokeParams(settings.optJSONObject(key)));
-            } else if ("channel".equals(key)) {
-                JSONArray jsonArray = settings.optJSONArray(key);
-                AlibcTradeSDK.setChannel(jsonArray.getString(0), jsonArray.getString(1));
-            } else if ("ISVCode".equals(key)) {
-                AlibcTradeSDK.setISVCode(settings.optString(key));
-            } else if ("ISVVersion".equals(key)) {
-                AlibcTradeSDK.setISVVersion(settings.optString(key));
-            }
+//            if ("forceH5".equals(key)) {
+//                AlibcTradeSDK.setForceH5(settings.optBoolean(key));
+//            } else if ("syncForTaoke".equals(key)) {
+//                AlibcTradeSDK.setSyncForTaoke(settings.optBoolean(key));
+//            } else if ("taokeParams".equals(key)) {
+//                AlibcTradeSDK.setTaokeParams(getTaokeParams(settings.optJSONObject(key)));
+//            } else if ("channel".equals(key)) {
+//                JSONArray jsonArray = settings.optJSONArray(key);
+//                AlibcTradeSDK.setChannel(jsonArray.getString(0), jsonArray.getString(1));
+//            } else if ("ISVCode".equals(key)) {
+//                AlibcTradeSDK.setISVCode(settings.optString(key));
+//            } else if ("ISVVersion".equals(key)) {
+//                AlibcTradeSDK.setISVVersion(settings.optString(key));
+//            }
         }
         callbackContext.success();
         return true;
@@ -217,7 +220,7 @@ public class BaichuanPlugin extends CordovaPlugin {
         if (null == taokeArgs) {
             return null;
         }
-        AlibcTaokeParams taokeParams = new AlibcTaokeParams();
+        AlibcTaokeParams taokeParams = new AlibcTaokeParams("", "", "");
 
         taokeParams.setPid(taokeArgs.optString("pid"));
         taokeParams.setAdzoneid(taokeArgs.optString("adzoneid"));
@@ -233,35 +236,15 @@ public class BaichuanPlugin extends CordovaPlugin {
     }
 
     private boolean showPage(JSONObject pageArgs, JSONObject taokeArgs, JSONObject showArgs, JSONObject exArgs, CallbackContext callbackContext) throws JSONException {
-        AlibcBasePage page = null;
-        String type = pageArgs.getString("type");
-        if ("itemDetailPage".equals(type)) {
-            //商品详情page
-            page = new AlibcDetailPage(pageArgs.getString("itemId"));
-        } else if ("shopPage".equals(type)) {
-            //实例化店铺打开page
-            page = new AlibcShopPage(pageArgs.getString("shopId"));
-        } else if ("addCartPage".equals(type)) {
-            //实例化添加购物车打开page
-            page = new AlibcAddCartPage(pageArgs.getString("itemId"));
-        } else if ("myOrdersPage".equals(type)) {
-            //实例化我的订单打开page
-            int status = 0;
-            if(pageArgs.has("status")) {
-                status = pageArgs.getInt("status");
-            }
-            page = new AlibcMyOrdersPage(status, pageArgs.optBoolean("allOrder") != Boolean.FALSE);
-        } else if ("myCartsPage".equals(type)) {
-            //实例化我的购物车打开page
-            page = new AlibcMyCartsPage();
-        } else if ("page".equals(type)) {
-            //实例化URL打开page
-            page = new AlibcPage(pageArgs.getString("url"));
-        }
-
         AlibcTaokeParams taokeParams = getTaokeParams(taokeArgs);
 
-        AlibcShowParams showParam = new AlibcShowParams(OpenType.Auto, false);
+        AlibcShowParams showParam = new AlibcShowParams();
+
+        showParam.setClientType("taobao");
+        showParam.setOpenType(OpenType.Native);
+        showParam.setBackUrl("");
+        showParam.setNativeOpenFailedMode(AlibcFailModeType.AlibcNativeFailModeJumpH5);
+
         if (null != showArgs) {
             if (showArgs.has("openType"))
                 showParam.setOpenType(OpenType.valueOf(showArgs.optString("openType")));
@@ -289,7 +272,7 @@ public class BaichuanPlugin extends CordovaPlugin {
             }
         }
 
-        AlibcTrade.show(cordova.getActivity(), page, showParam, taokeParams, exParams, callback(callbackContext));
+        AlibcTrade.openByUrl(cordova.getActivity(), "trade",pageArgs.getString("url"), null,new WebViewClient(), new WebChromeClient(),showParam, taokeParams, exParams, callback(callbackContext));
         return true;
     }
 
